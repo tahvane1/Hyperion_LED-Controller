@@ -43,10 +43,13 @@ void WrapperJsonServer::handleConnection(boolean newClient) {
 void WrapperJsonServer::readData(void) {
   String data = _tcpClient.readStringUntil('\n');
   Log.debug("Received data: %s", data.c_str());
-  StaticJsonBuffer<TCP_BUFFER> jsonBuffer;
-  JsonObject& root = jsonBuffer.parseObject(data.c_str());
-  if (root.success()) {
-    String command = root["command"].asString();
+  StaticJsonDocument<TCP_BUFFER> root;
+  auto error = deserializeJson(root, data.c_str());
+  //JsonObject root = jsonBuffer.parseObject();
+  if (error) {
+    Log.error("JSON not parsed");
+  } else {
+    String command = root["command"];
     if (command.equals("serverinfo")) {
       Log.info("serverinfo");     
       _tcpClient.print("{\"info\":{\"effects\":["
@@ -82,7 +85,7 @@ void WrapperJsonServer::readData(void) {
       clearCmd();
       _tcpClient.println("{\"success\":true}");
     } else if (command.equals("effect")) {
-      String effect = root["effect"]["name"].asString();
+      String effect = root["effect"]["name"];
       double effectSpeed = root["effect"]["args"]["speed"];
       int interval = 0;
       if (effectSpeed > 0) {
@@ -100,8 +103,6 @@ void WrapperJsonServer::readData(void) {
     } else {
       _tcpClient.println("{\"success\":false}");
     }
-  } else {
-    Log.error("JSON not parsed");
   }
 }
 
@@ -137,4 +138,3 @@ void WrapperJsonServer::effectChange(Mode effect, int interval/* = 0*/) {
     effectChangePointer(effect, interval);
   }
 }
-

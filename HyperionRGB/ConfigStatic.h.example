@@ -15,7 +15,7 @@
 
 /*------------------------------------------------*/
 /*Main static configuration*/
-//This cannot be changed via web inteface
+//This cannot be changed via web inteface 
 
 //#define CONFIG_LED_SPI_CHIPSET WS2801 //Comment out for clockless
 #define CONFIG_LED_CLOCKLESS_CHIPSET WS2812 //Comment in for clockless
