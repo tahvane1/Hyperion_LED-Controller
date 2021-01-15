@@ -11,7 +11,7 @@ German Tutorial: https://forum-raspberrypi.de/forum/thread/25242-tutorial-esp826
 
 Tested with following following libraries (other versions may work):
 # IDE
-a) Arduino IDE 1.8.5
+a) Arduino IDE 1.8.13
 
 # Board Library
 a) esp8266 2.4.1 http://arduino.esp8266.com/stable/package_esp8266com_index.json
@@ -21,11 +21,11 @@ b) for esp32 https://github.com/espressif/arduino-esp32
 # Libraries
 a) ArduinoThread 2.1.1
 
-b) ArduinoJSON 5.12.0
+b) ArduinoJSON 6.17.2
 
 c) LinkedList 1.2.3
 
-d) FastLED 3.1.6
+d) FastLED 3.4.0
 
 e) Logging https://github.com/SciLor/Arduino-logging-library - install manually: Download zip from github and install via Arduino IDE, Sketch -> Include Library -> Add .ZIP Library
 
